@@ -1,7 +1,7 @@
 const URL = require("../models/urlModel");
 
 exports.create_short_url = async (req, res) => {
-    const { originalUrl, alias } = req.body;
+    const { original_url, alias } = req.body;
     let shortUrl;
 
     // Generate unique short URL
@@ -20,7 +20,7 @@ exports.create_short_url = async (req, res) => {
 
     // Create new URL document
     const newUrl = new URL({
-        original_url: originalUrl,
+        original_url: original_url,
         short_url: shortUrl
     });
 
