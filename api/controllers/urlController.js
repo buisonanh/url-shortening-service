@@ -4,6 +4,13 @@ exports.create_short_url = async (req, res) => {
     const { original_url, alias } = req.body;
     let shortUrl;
 
+    //validate url
+    const urlRegex = new RegExp(/(http|https):\/\/[a-zA-Z0-9-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/);
+    if (!urlRegex.test(original_url)) {
+        return res.status(400).json({"error": "invalid URL"}); 
+    }
+    
+
     // Generate unique short URL
     if (alias) {
         const existingUrl = await URL.findOne({ short_url: alias });
