@@ -8,9 +8,9 @@ exports.create_short_url = async (req, res) => {
     if (alias) {
         const existingUrl = await URL.findOne({ short_url: alias });
         if (existingUrl) {
-            return res.status(401).send("Alias already exists");
+            return res.status(401).json({"error": "Alias alredy exists"});
         } else if (alias.length < 5) {
-            return res.status(400).send("Alias should be at least 5 characters long");
+            return res.status(400).json("Alias should be at least 5 characters long");
         } else {
             shortUrl = alias;
         }
